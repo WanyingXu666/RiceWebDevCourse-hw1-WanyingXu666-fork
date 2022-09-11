@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Registration Form</h1>
+    <form action="/formProcessor.html" method = "get" id="Myform" onsubmit="return validation()">
+        <p><label for="accountname">account name: </label>
+            <input type="text" name="accountname" id="accountname" required pattern="^[a-zA-Z]+\w*$" title="Account number can only be upper or lower case letters and numbers, but may not start with a number">
+        </p>
+        <p><label for="displayname">display name(optional): </label><input type="text" name="displayname" id="displayname" ></p>
+        <p><label for="email">email address: </label><input type="email" name="email" id="email" required></p>
+        <p><label for="phone">phone number: </label><input type="tel" name="phone" id="phone" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="the format need to be 123-123-1234"></p>
+        <p><label for="birth">date of birth: </label><input type="date" name="birth" id="birth" required></p>
+        <p><label for="zip">zip code: </label><input type="number" name="zip" id="zip" required pattern="^\d{5}$"></p>
+        <p><label for="password">password: </label><input type="password" name="password" id="password" required></p>
+        <p><label for="password_conf">password confirmination: </label><input type="password" name="password_conf" id="password_conf" required></p>
+        <p><input type="reset" value = "Clear" id="clear"> <input type="submit"  id="submit" ></p>
+        <p><input type="hidden" name="timestamp" id="timestamp" value=""></p>
+
+
+    </form>
+    <script>
+        function validation(){
+            let errors = [];
+
+            let birthDate = document.forms["Myform"]["birth"].value;
+            let age = Math.floor((new Date() - new Date(birthDate).getTime()) / 3.15576e+10);
+            if (age < 18){
+                errors.push("Only 18 years of age or older are allowed to register");
+            }
+
+            // let accountName = document.forms["Myform"]["birth"].value;
+            // if (accountName.match('^[a-zA-Z]+\w*$') == null){
+            //     errors.push("Account number can only be upper or lower case" +
+            //                 "letters and numbers, but may not start with a number");
+            // }
+            let password = document.forms["Myform"]["password"].value
+            let password_conf =  document.forms["Myform"]["password_conf"].value
+            if(password != password_conf){
+                errors.push("The two passwords do not match, please try again");
+            }
+
+            if (errors.length > 0) {
+                window.alert(errors.map((e, index) => `Error ${index + 1}: ${e}`).join('\n'));
+                return false;
+            }
+            document.forms["Myform"]["timestamp"].value = Date.now();
+            return true;
+        }
+    </script>
+</body>
+</html>

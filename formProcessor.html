@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>account name:</th>
+            <th><span id="accountname"></span></th>
+        </tr>
+        <tr>
+            <th>display name(optional):</th>
+            <th><span id="displayname"></span></th>
+        </tr>
+        <tr>
+            <th>email address:</th>
+            <th><span id="email"></span></th>
+        </tr>
+        <tr>
+            <th>phone number:</th>
+            <th><span id="phone"></span></th>
+        </tr>
+        <tr>
+            <th>date of birth:</th>
+            <th><span id="birth"></span></th>
+        </tr>
+        <tr>
+            <th>zip code:</th>
+            <th><span id="zip"></span></th>
+        </tr>
+        <tr>
+            <th>password: </th>
+            <th><span id="password"></span></th>
+        </tr>
+        <tr>
+            <th>password confirmination:</th>
+            <th><span id="password_conf"></span></th>
+        </tr>
+        <tr>
+            <th>timestamp:</th>
+            <th><span id="timestamp"></span></th>
+        </tr>
+        
+    </table>
+    <script>
+        var query = window.location.search
+        var params = new URLSearchParams(query);
+        document.getElementById("accountname").innerHTML = String(params.get('accountname'));
+        document.getElementById("displayname").innerHTML = String(params.get('displayname') || "N/A");
+        document.getElementById("email").innerHTML = String(params.get('email'));
+        document.getElementById("phone").innerHTML = String(params.get('phone'));
+        document.getElementById("birth").innerHTML = String(params.get('birth'));
+        document.getElementById("zip").innerHTML = String(params.get('zip'));
+        document.getElementById("password").innerHTML = String(params.get('password'));
+        document.getElementById("password_conf").innerHTML = String(params.get('password_conf'));
+        document.getElementById("timestamp").innerHTML = String(Date(params.get('timestamp')));
+    </script>
+</body>
+</html>
